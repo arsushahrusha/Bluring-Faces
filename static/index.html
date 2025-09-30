@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Face Blurring</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎥 Video Face Blurring</h1>
+            <p>Upload your video and blur faces automatically</p>
+        </div>
+        
+        <div class="content">
+            <!-- Step 1: Upload -->
+            <div class="step" id="step-upload">
+                <h2><span class="step-number">1</span> Upload Video</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <h3>Click to upload or drag & drop</h3>
+                    <p>Supported formats: MP4, AVI, MOV, MKV</p>
+                    <p>Max file size: 500MB</p>
+                    <input type="file" id="fileInput" class="file-input" accept="video/*">
+                </div>
+                <div id="fileInfo" class="file-info hidden"></div>
+            </div>
+            
+            <!-- Step 2: Analyze -->
+            <div class="step hidden" id="step-analyze">
+                <h2><span class="step-number">2</span> Analyze Video</h2>
+                <p>Click the button below to detect faces in your video.</p>
+                <button class="btn" id="analyzeBtn">Start Analysis</button>
+                
+                <div class="progress-container hidden" id="analyzeProgress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="analyzeProgressFill"></div>
+                    </div>
+                    <div class="progress-text" id="analyzeProgressText">0%</div>
+                </div>
+                
+                <div id="analyzeStatus"></div>
+            </div>
+            
+            <!-- Step 3: Preview & Process -->
+            <div class="step hidden" id="step-process">
+                <h2><span class="step-number">3</span> Preview & Process</h2>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="blurStrength">Blur Strength: <span id="blurValue">20</span></label>
+                        <input type="range" id="blurStrength" min="1" max="50" value="20">
+                    </div>
+                </div>
+                
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <h3>Original Video</h3>
+                        <video id="originalVideo" controls></video>
+                    </div>
+                    <div class="video-wrapper">
+                        <h3>Preview (First 10 seconds)</h3>
+                        <video id="previewVideo" controls></video>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="btn" id="previewBtn">Generate Preview</button>
+                    <button class="btn btn-success" id="processBtn">Process Full Video</button>
+                </div>
+                
+                <div class="progress-container hidden" id="processProgress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="processProgressFill"></div>
+                    </div>
+                    <div class="progress-text" id="processProgressText">0%</div>
+                </div>
+                
+                <div id="processStatus"></div>
+            </div>
+            
+            <!-- Step 4: Download -->
+            <div class="step hidden" id="step-download">
+                <h2><span class="step-number">4</span> Download Result</h2>
+                <div class="status success">
+                    <p>✅ Your video has been processed successfully!</p>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="btn btn-success" id="downloadBtn">Download Processed Video</button>
+                    <button class="btn" id="newVideoBtn">Process Another Video</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
